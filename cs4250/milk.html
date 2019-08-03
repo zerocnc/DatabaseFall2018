@@ -1,0 +1,57 @@
+<html>
+	<?php /* Include files */
+		include "../info.php";
+		include "phpFunctions.php";        
+	?>
+
+<head>	
+	<title>CS4250 - Database Project: Milk Relation</title> 
+	<link rel="stylesheet" href="style.css">
+	</head>
+<body>
+	<header>
+		<div id="logo">Where's Milk?</div>
+		<nav>
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section>
+		<strong>Query: </strong>Select Aisle.aisleNum as "Aisle Number", Aisle.typeGoods as "Type Goods", Product.productName as "Product Name" From Aisle inner join StoredIN on (Aisle.aisleNum = StoredIn.aisleNum) inner join Product on (StoredIn.productID = Product.productID) where Product.ProductName like "%milk%";
+	</section>
+	<section id="pageContent">
+		<main role="main">
+			<article>
+				<?php
+					
+					// Create connection
+					$db = new PDO('mysql:host=localhost;dbname=rneal;charset=utf8mb4', $username, $password);
+					// $sql = "Select Aisle.aisleNum as AisleNumber, Aisle.typeGoods as TypeGoods, Product.productName as ProductName From Aisle inner join StoredIN on (Aisle.aisleNum = StoredIn.aisleNum) inner join Product on (StoredIn.productID = Product.productID) where Product.ProductName like '%milk%';";
+					$sql = 'Select Aisle.aisleNum as "Aisle Number", Aisle.typeGoods as "Type Goods", Product.productName as "Product Name" From Aisle inner join StoredIN on (Aisle.aisleNum = StoredIn.aisleNum) inner join Product on (StoredIn.productID = Product.productID) where Product.ProductName like "%milk%";';
+
+					try	{
+						$result = $db->query($sql, PDO::FETCH_ASSOC);
+						printTable($result);
+					}
+						catch( PDOException $e) {
+							echo $e;
+					}
+
+					// Close connection to SQL Database
+					$result = NULL;
+					$db = NULL;
+
+				// End of PHP
+				?>
+				</article>
+			</main>
+		</section >
+		<footer>
+			<p>If you have any questions, you can contact me.</p>
+			<address>
+				Contact: <a href="mailto:rneal@csustan.edu">Mail me</a>
+			</address>
+		</footer>
+	</body>
+</html>

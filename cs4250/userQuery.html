@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<?php /* Include files */
+		include "../info.php";
+        include "phpFunctions.php";
+	?>
+
+<head>
+    <meta charset="utf-8">
+	<title>CS4250 - Database Project</title> 
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div id="logo">Your Query Results</div>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section>
+        <strong>Query: </strong> <?php echo $_POST['userQuery']; ?>
+    </section>
+	<section id="pageContent">
+        <main role="main">
+            <?php 
+
+                $errors = validate();
+
+                // If not a valid command (update, insert, alter), will not execute the command.
+                // Can add other commands if necessary. But would be better to use a view to limit access
+                // to different parts of the SQL server for eacy employee.
+                if ($errors)
+                {
+                    echo $errors["userQuery"];
+                }else{
+                    // Run Query
+                    run_User_Query();
+                }
+            ?>
+        </main>
+    </section>
+    <footer>
+        <p>If you have any questions, you can contact me.</p>
+		<address>
+			Contact: <a href="mailto:rneal@csustan.edu">Mail me</a>
+		</address>
+    </footer>
+</body>
+</html>

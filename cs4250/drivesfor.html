@@ -1,0 +1,51 @@
+<html>
+	<?php /* Include files */
+		include "../info.php";
+		include "phpFunctions.php";
+	?>
+
+<head>	
+	<title>CS4250 - Database Project: Drives For Relation</title> 
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<header>
+		<div id="logo">DrivesFor()</div>
+			<nav>
+				<ul>
+					<li><a href="../index.html">Home</a></li>
+				</ul>
+			</nav>
+	</header>
+		<section>
+			<strong>Query: </strong>SELECT * FROM `DrivesFor`;
+		</section>
+	<section id="pageContent">
+		<main role="main">
+			<article>
+			<?php
+				// Create connection
+				$db = new PDO('mysql:host=localhost;dbname=rneal;charset=utf8mb4', $username, $password);
+				$sql = "SELECT * FROM `DrivesFor`;";
+				$result = $db->query($sql, PDO::FETCH_ASSOC);
+
+				printTable($result);
+				
+				// Close connection to SQL Database
+				$db = NULL;
+				$result = NULL;
+
+			// End of PHP
+			?>
+			</article>
+		</main>
+	</section>
+	<footer>
+	<p>If you have any questions, you can contact me.</p>
+		<address>
+			Contact: <a href="mailto:rneal@csustan.edu">Mail me</a>
+		</address>
+	</footer>
+</body>
+</html>

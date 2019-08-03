@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en" class="no-js">
+	<?php /* Include files */
+		include "../info.php";
+		include "../server.php"; 
+		include "phpFunctions.php";
+	?>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+	<title>CS4250 - Database Project: Payroll for Part time employees</title> 
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<div id="logo">Payroll for all Part Time Employees</div>
+		<nav>
+			<ul>
+				<li><a href="../index.html">Home</a>
+			</ul>
+		</nav>
+	</header>
+	<section>
+		<strong>Query: </strong>Select Concat(E.firstName, " ", E.lastName) AS "Employee Name", Concat( P.hoursWorked, " * $", Format(P.hourlyWage,2 ), " = $", Format((P.hoursWorked * P.hourlyWage),2 ) ) AS "Hours * Pay Rate = Pay" From Employee E, PartTime P Where E.employeeID = P.employee_ID and E.payGrade = "P";
+	</section>
+	<section id="pageContent">
+		<main role="main">
+			<article>	
+				<?php
+					
+					// Create connection
+					$db = new PDO('mysql:host=localhost;dbname=rneal;charset=utf8mb4', $username, $password);
+					$sql = 'Select Concat(E.firstName, " ", E.lastName) AS "Employee Name", Concat( P.hoursWorked, " * $", Format(P.hourlyWage,2 ), " = $", Format((P.hoursWorked * P.hourlyWage),2 ) ) AS "Hours * Pay Rate = Pay" From Employee E, PartTime P Where E.employeeID = P.employee_ID and E.payGrade = "P";';
+
+					try	{
+						$result = $db->query($sql, PDO::FETCH_ASSOC);
+						printTable($result);
+					}
+						catch( PDOException $e) {
+							echo $e;
+					}
+
+					// Close connection to SQL Database
+					$result = NULL;
+					$db = NULL;
+
+				// End of PHP
+				?>
+			</article>
+		</main>
+	</section>
+	<footer>
+		<p>If you have any questions, you can contact me.</p>
+			<address>
+				Contact: <a href="mailto:rneal@csustan.edu">Mail me</a>
+			</address>
+	</footer>
+	</body>
+</html>

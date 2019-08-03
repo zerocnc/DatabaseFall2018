@@ -1,0 +1,80 @@
+<html>
+	<?php /* Include files */
+		include "info.php";
+		include "server.php"; 
+	?>
+
+<head>	
+	<title>CS4250 - Database Project</title>
+	<link rel="stylesheet" href="./cs4250/style.css">
+</head>
+<body>
+	<header>
+		<div id="logo">Grocery Store - Database</div>
+		<nav>
+			<ul>
+				<li><a href="">Home</a></li>
+			</ul>
+		</nav>
+	</header>
+	<section>
+		<strong>Team Members:</strong> Richard Neal 
+	</section>
+<section id="pageContent">
+<main role="main">
+	<article>
+		<!-- Relation list -->
+		<h2>Relations Tables: </h2>
+		<ol>
+			<li><a href="./cs4250/drivesfor.html">DrivesFor(supplierID, driverID)</a></li>
+			<li><a href="./cs4250/delivers.html">Delivers(productID, driverID,deliveryDate, supplierID)</a></li>
+			<li><a href="./cs4250/purchases.html">Purchases(Sale_ID, employee_ID, product_ID, customer_ID)</a></li>
+			<li><a href="./cs4250/department.html">WorksIn(depNum, employeeID)</a></li>
+			<li><a href="./cs4250/managesBy.html">Manages(mid, employeeID, IsManagedBy)</a></li>
+			<li><a href="./cs4250/storedin.html">StoredIn(aisleNum, productID)</a></li>
+		</ol> 
+	</article>
+	<article>
+		<!-- Query list -->
+		<h2>Query Listing: </h2>
+		<dl>
+			<dt>1. <a href="./cs4250/relation1.html">Driver Listing</a></dt>
+				<dd>I want a list of names of the delivery drivers and the company they deliver for.</dd>
+			<dt>2. <a href="./cs4250/milk.html">Milk</a></dt>
+				<dd>White cold drink, where can a customer find some?</dd>
+			<dt>3. <a href="./cs4250/managerListing.html">Manager Listing</a></dt>
+				<dd>Who's in charge? I want a list of employees and whom they report too.</dd>
+			<dt>4. <a href="./cs4250/payrollParttime.html">Payroll for Part Time </a>
+				<dd>Need to calculate this weeks payroll for each part time employee.</dd>
+			<dt>5. <a href="./cs4250/hoursworked.html">Hours worked for Part Time employees</a>
+				<dd>We need to make sure our part time employees don't work more then 30 hours per week, so we need to check on hours worked so far.</dd>
+			<dt>6. <a href="./cs4250/butcher.html">Who is a butcher?</a>
+				<dd>Find the people who work in  the butcher department</dd>
+			<dt>7. <a href="./cs4250/recall.html">Lettuce recalled?</a>
+				<dd>We need to call our customers who bought lettuce though the year, but we don't need a repeats on the listing.</dd>
+		</dl> 
+	</article>
+	<article>
+		<!-- Ad-hoc Query -->
+		<h2> Ad-hoc Query</h2>
+
+		<form method="post" action="<?php echo htmlspecialchars('./cs4250/userQuery.html');?>"  >
+			User Query: <input type="text" name="userQuery" size="50">
+			<input type="reset"><input type="submit"><br />
+		</form>
+	</article>
+	<article>
+		<h2>Crud Application - Under Construction</h2>
+		<h2><a href="./cs4250/crudApp/index.php">Entrance</a></h2>
+		<p>Crud stands for Create, Retrieve, Update, delete and allows a user to do the preveious actions in a simple matter without knowing SQL. </p>
+	</article>
+</main>
+</section >
+<footer>
+		<p>If you have any questions, you can contact me.</p>
+		<address>
+			Contact: <a href="mailto:rneal@csustan.edu">Mail me</a>
+		</address>
+	</footer>
+</body>
+</html>

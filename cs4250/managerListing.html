@@ -1,0 +1,55 @@
+<html>
+	<?php /* Include files */
+		include "../info.php";
+		include "phpFunctions.php";        
+	?>
+
+<head>	
+	<title>CS4250 - Database Project: Manager Listing</title> 
+	<link rel="stylesheet" href="style.css">
+	</head>
+<body>
+	<header>
+		<div id="logo">Who's in charge?</div>
+		<nav>
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+			</ul>
+	</header>
+	<section>
+		<strong>Query: </strong>SELECT Concat(E.firstName, " ", E.lastName) AS "Employee", Concat( M.firstName, " ", M.lastName) AS "Manage By" FROM Employee E LEFT OUTER JOIN (Manages S INNER JOIN Employee M ON S.IsManagedBy = M.employeeID) ON E.employeeID = S.employeeID ORDER BY E.employeeID DESC;
+	</section>
+	<section id="pageContent">
+		<main role="main">
+			<article>
+				<?php
+					
+					// Create connection
+					$db = new PDO('mysql:host=localhost;dbname=rneal;charset=utf8mb4', $username, $password);
+					$sql = 'SELECT Concat(E.firstName, " ", E.lastName) AS "Employee", Concat( M.firstName, " ", M.lastName) AS "Manage By" FROM Employee E LEFT OUTER JOIN (Manages S INNER JOIN Employee M ON S.IsManagedBy = M.employeeID) ON E.employeeID = S.employeeID ORDER BY E.employeeID DESC ';
+
+					try	{
+						$result = $db->query($sql, PDO::FETCH_ASSOC);
+						printTable($result);
+					}
+						catch( PDOException $e) {
+							echo $e;
+					}
+
+					// Close connection to SQL Database
+					$result = NULL;
+					$db = NULL;
+
+				// End of PHP
+				?>
+			</article>
+		</main>
+	</section>
+	<footer>
+		<p>If you have any questions, you can contact me.</p>
+			<address>
+				Contact: <a href="mailto:rneal@csustan.edu">Mail me</a>
+			</address>
+	</footer>
+</body>
+</html>

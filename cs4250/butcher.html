@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en" class="no-js">
+	<?php /* Include files */
+		include "../info.php";
+		include "phpFunctions.php";
+	?>
+
+<head>	
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>CS4250 - Database Project: Find Butchers in Department</title> 
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<div id="logo">Which employee is a Butcher?</div>
+		<nav>
+			<ul>
+				<li><a href="../index.html">Home</a><li>
+			</ul>
+		</nav>
+	</header>
+	<section>
+		<strong>Query: </strong>Select E.firstName AS "First Name",E.lastName AS "Last Name" From Employee E Where E.employeeID in ( select A.employeeID From WorksIn A where A.depNum in ( SELECT B.depNum From Department B where B.depName = "Butcher") ) Order BY E.firstName, E.lastName ASC;
+	</section>
+	<section id="pageContent">
+		<main id="main">
+			<?php
+				// Create connection
+				$db = new PDO('mysql:host=localhost;dbname=rneal;charset=utf8mb4', $username, $password);
+				$sql = 'Select E.firstName AS "First Name",E.lastName AS "Last Name" From Employee E Where E.employeeID in ( select A.employeeID From WorksIn A where A.depNum in ( SELECT B.depNum From Department B where B.depName = "Butcher") ) Order BY E.firstName, E.lastName ASC;';
+				$result = $db->query($sql, PDO::FETCH_ASSOC);
+
+				printTable($result);
+				
+				// Close connection to SQL Database
+				$result = NULL;
+				$db = NULL;
+
+			// End of PHP
+			?>
+		</main>
+	</section>
+	<footer>
+		<p>If you have any questions, you can contact me.</p>
+		<address>
+			Contact: <a href="mailto:rneal@csustan.edu">Mail me</a>
+		</address>
+	</footer>
+</body>
+</html>
